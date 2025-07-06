@@ -120,14 +120,15 @@ open class GrowingNotificationBanner: BaseNotificationBanner {
         style: BannerStyle = .info,
         colors: BannerColorsProtocol? = nil,
         iconPosition: IconPosition = .center,
-        sideViewSize: CGFloat = 24.0
+        sideViewSize: CGFloat = 24.0,
+        bannerIndex: Int
     ) {
         
         self.leftView = leftView
         self.rightView = rightView
         self.sideViewSize = sideViewSize
         
-        super.init(style: style, colors: colors)
+        super.init(style: style, colors: colors, bannerIndex: bannerIndex)
         
         let labelsView = UIStackView()
         labelsView.axis = .vertical

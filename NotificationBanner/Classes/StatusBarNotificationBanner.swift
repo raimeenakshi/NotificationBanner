@@ -39,8 +39,8 @@ open class StatusBarNotificationBanner: BaseNotificationBanner {
         }
     }
 
-    override init(style: BannerStyle, colors: BannerColorsProtocol? = nil) {
-        super.init(style: style, colors: colors)
+    override init(style: BannerStyle, colors: BannerColorsProtocol? = nil, bannerIndex: Int) {
+        super.init(style: style, colors: colors, bannerIndex: bannerIndex)
 
         titleLabel = MarqueeLabel()
         (titleLabel as! MarqueeLabel).animationDelay = 2
@@ -63,23 +63,25 @@ open class StatusBarNotificationBanner: BaseNotificationBanner {
     public convenience init(
         title: String,
         style: BannerStyle = .info,
-        colors: BannerColorsProtocol? = nil
+        colors: BannerColorsProtocol? = nil,
+        bannerIndex: Int
     ) {
-        self.init(style: style, colors: colors)
+        self.init(style: style, colors: colors, bannerIndex: bannerIndex)
         titleLabel!.text = title
     }
 
     public convenience init(
         attributedTitle: NSAttributedString,
         style: BannerStyle = .info,
-        colors: BannerColorsProtocol? = nil
+        colors: BannerColorsProtocol? = nil,
+        bannerIndex: Int
     ) {
-        self.init(style: style, colors: colors)
+        self.init(style: style, colors: colors, bannerIndex: bannerIndex)
         titleLabel!.attributedText = attributedTitle
     }
 
-    public init(customView: UIView) {
-        super.init(style: .customView)
+    public init(customView: UIView, bannerIndex: Int) {
+        super.init(style: .customView, bannerIndex: bannerIndex)
         self.customView = customView
         
         contentView.addSubview(customView)

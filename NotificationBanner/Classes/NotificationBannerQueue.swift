@@ -86,11 +86,10 @@ open class NotificationBannerQueue: NSObject {
         -parameter banner: A notification banner to remove from the queue.
      */
     func removeBanner(_ banner: BaseNotificationBanner) {
-
         if let index = banners.firstIndex(of: banner) {
             banners.remove(at: index)
         }
-
+        banners.sort { $0.bannerIndex < $1.bannerIndex }
         banners.forEach {
             $0.updateBannerPositionFrames()
             if $0.isDisplaying {

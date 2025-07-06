@@ -34,7 +34,8 @@ open class FloatingNotificationBanner: GrowingNotificationBanner {
         rightView: UIView? = nil,
         style: BannerStyle = .info,
         colors: BannerColorsProtocol? = nil,
-        iconPosition: IconPosition = .center
+        iconPosition: IconPosition = .center,
+        bannerIndex: Int
     ) {
 
         super.init(
@@ -44,7 +45,8 @@ open class FloatingNotificationBanner: GrowingNotificationBanner {
             rightView: rightView,
             style: style,
             colors: colors,
-            iconPosition: iconPosition
+            iconPosition: iconPosition,
+            bannerIndex: bannerIndex
         )
         
         if let titleFont = titleFont {
@@ -74,8 +76,8 @@ open class FloatingNotificationBanner: GrowingNotificationBanner {
         }
     }
     
-    public init(customView: UIView) {
-        super.init(style: .customView)
+    public init(customView: UIView, bannerIndex: Int) {
+        super.init(style: .customView, bannerIndex: bannerIndex)
         self.customView = customView
         
         contentView.addSubview(customView)

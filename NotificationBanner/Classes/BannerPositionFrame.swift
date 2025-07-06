@@ -24,10 +24,10 @@ public enum BannerPosition: Int {
     case top
 }
 
-class BannerPositionFrame {
+public class BannerPositionFrame {
     
-    private(set) var startFrame: CGRect = .zero
-    private(set) var endFrame: CGRect = .zero
+    public var startFrame: CGRect = .zero
+    public var endFrame: CGRect = .zero
 
     init(
         bannerPosition: BannerPosition,

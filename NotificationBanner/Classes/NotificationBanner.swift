@@ -45,10 +45,11 @@ open class NotificationBanner: BaseNotificationBanner {
         leftView: UIView? = nil,
         rightView: UIView? = nil,
         style: BannerStyle = .info,
-        colors: BannerColorsProtocol? = nil
+        colors: BannerColorsProtocol? = nil,
+        bannerIndex: Int
     ) {
         
-        super.init(style: style, colors: colors)
+        super.init(style: style, colors: colors, bannerIndex: bannerIndex)
         
         if let leftView = leftView {
             contentView.addSubview(leftView)
@@ -151,17 +152,18 @@ open class NotificationBanner: BaseNotificationBanner {
         leftView: UIView? = nil,
         rightView: UIView? = nil,
         style: BannerStyle = .info,
-        colors: BannerColorsProtocol? = nil
+        colors: BannerColorsProtocol? = nil,
+        bannerIndex: Int
     ) {
         
         let subtitle: String? = (attributedSubtitle != nil) ? "" : nil
-        self.init(title: "", subtitle: subtitle, leftView: leftView, rightView: rightView, style: style, colors: colors)
+        self.init(title: "", subtitle: subtitle, leftView: leftView, rightView: rightView, style: style, colors: colors, bannerIndex: bannerIndex)
         titleLabel!.attributedText = attributedTitle
         subtitleLabel?.attributedText = attributedSubtitle
     }
     
-    public init(customView: UIView) {
-        super.init(style: .customView)
+    public init(customView: UIView, bannerIndex: Int) {
+        super.init(style: .customView, bannerIndex: bannerIndex)
         self.customView = customView
         
         contentView.addSubview(customView)

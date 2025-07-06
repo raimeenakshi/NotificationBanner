@@ -30,6 +30,7 @@ public protocol NotificationBannerDelegate: AnyObject {
 
 @objcMembers
 open class BaseNotificationBanner: UIView {
+    private(set) var bannerIndex: Int
 
     /// Notification that will be posted when a notification banner will appear
     public static let BannerWillAppear: Notification.Name = Notification.Name(rawValue: "NotificationBannerWillAppear")
@@ -147,7 +148,7 @@ open class BaseNotificationBanner: UIView {
     internal var padding: CGFloat = 15.0
 
     /// The view controller to display the banner on. This is useful if you are wanting to display a banner underneath a navigation bar
-    internal weak var parentViewController: UIViewController?
+    public weak var parentViewController: UIViewController?
 
     /// If this is not nil, then this height will be used instead of the auto calculated height
     internal var customBannerHeight: CGFloat?
@@ -157,23 +158,14 @@ open class BaseNotificationBanner: UIView {
 
     /// The main window of the application which banner views are placed on
     private let appWindow: UIWindow? = {
-        var appWindow: UIWindow?
-        if #available(iOS 13.0, *) {
-            let connectedScenes = UIApplication.shared.connectedScenes
-            let windowScene = connectedScenes.compactMap { $0 as? UIWindowScene }
-            let activeWindow = windowScene.first { $0.activationState == .foregroundActive || $0.activationState == .foregroundInactive }
-            let keyWindow = activeWindow.flatMap { $0.windows.first(where: { $0.isKeyWindow }) }
-            appWindow = keyWindow
-        }
-
-        return appWindow ?? UIApplication.shared.delegate?.window ?? nil
+        return UIApplication.shared.delegate?.window ?? nil
     }()
 
     /// The position the notification banner should slide in from
-    private(set) var bannerPosition: BannerPosition = .top
+    public var bannerPosition: BannerPosition = .top
 
     /// The notification banner sides edges insets from superview. If presented - spacerView color will be transparent
-    internal var bannerEdgeInsets: UIEdgeInsets? = nil {
+    public var bannerEdgeInsets: UIEdgeInsets? = nil {
         didSet {
             if bannerEdgeInsets != nil {
                 spacerView.backgroundColor = .clear
@@ -182,7 +174,7 @@ open class BaseNotificationBanner: UIView {
     }
 
     /// Object that stores the start and end frames for the notification banner based on the provided banner position
-    internal var bannerPositionFrame: BannerPositionFrame!
+    public var bannerPositionFrame: BannerPositionFrame!
 
     /// The user info that gets passed to each notification
     private var notificationUserInfo: [String: BaseNotificationBanner] {
@@ -200,8 +192,9 @@ open class BaseNotificationBanner: UIView {
         }
     }
 
-    init(style: BannerStyle, colors: BannerColorsProtocol? = nil) {
+    init(style: BannerStyle, colors: BannerColorsProtocol? = nil, bannerIndex: Int) {
         self.style = style
+        self.bannerIndex = bannerIndex
         super.init(frame: .zero)
 
         spacerView = UIView()
@@ -300,7 +293,7 @@ open class BaseNotificationBanner: UIView {
         }
     }
     
-    internal func updateBannerPositionFrames() {
+    public func updateBannerPositionFrames() {
         guard let window = appWindow else { return }
         bannerPositionFrame = BannerPositionFrame(
             bannerPosition: bannerPosition,
