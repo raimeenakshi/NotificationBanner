@@ -157,14 +157,16 @@ open class BaseNotificationBanner: UIView {
 
     /// The main window of the application which banner views are placed on
     private let appWindow: UIWindow? = {
+        var appWindow: UIWindow?
         if #available(iOS 13.0, *) {
-            return UIApplication.shared.connectedScenes
-                .first { $0.activationState == .foregroundActive || $0.activationState == .foregroundInactive }
-                .map { $0 as? UIWindowScene }
-                .flatMap { $0?.windows.first } ?? UIApplication.shared.delegate?.window ?? UIApplication.shared.keyWindow
+            let connectedScenes = UIApplication.shared.connectedScenes
+            let windowScene = connectedScenes.compactMap { $0 as? UIWindowScene }
+            let activeWindow = windowScene.first { $0.activationState == .foregroundActive || $0.activationState == .foregroundInactive }
+            let keyWindow = activeWindow.flatMap { $0.windows.first(where: { $0.isKeyWindow }) }
+            appWindow = keyWindow
         }
 
-        return UIApplication.shared.delegate?.window ?? nil
+        return appWindow ?? UIApplication.shared.delegate?.window ?? nil
     }()
 
     /// The position the notification banner should slide in from
@@ -518,8 +520,15 @@ open class BaseNotificationBanner: UIView {
         guard #available(iOS 13.0, *), !NotificationBannerUtilities.isNotchFeaturedIPhone() else {
             return 0
         }
+        
+        // Quick one-liner for the status bar height
+        let statusBarHeight = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .first?
+            .statusBarManager?
+            .statusBarFrame.height ?? 0
 
-        return UIApplication.shared.statusBarFrame.height
+        return statusBarHeight
     }
 
     /**
@@ -702,13 +711,13 @@ open class BaseNotificationBanner: UIView {
 
     internal func shouldAdjustForDynamicIsland() -> Bool {
         return NotificationBannerUtilities.hasDynamicIsland()
-            && UIApplication.shared.statusBarOrientation.isPortrait
+            && UIApplication.shared.isPortrait
             && (self.parentViewController?.navigationController?.isNavigationBarHidden ?? true)
     }
     
     internal func shouldAdjustForNotchFeaturedIphone() -> Bool {
         return NotificationBannerUtilities.isNotchFeaturedIPhone()
-            && UIApplication.shared.statusBarOrientation.isPortrait
+            && UIApplication.shared.isPortrait
             && (self.parentViewController?.navigationController?.isNavigationBarHidden ?? true)
     }
     /**
@@ -746,3 +755,25 @@ open class BaseNotificationBanner: UIView {
     }
 }
 
+extension UIApplication {
+    var currentInterfaceOrientation: UIInterfaceOrientation? {
+        if #available(iOS 13.0, *) {
+            // iOS 13+: Use window scene
+            return connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .first?
+                .interfaceOrientation
+        } else {
+            // iOS 12 and below: Use deprecated method
+            return statusBarOrientation
+        }
+    }
+    
+    var isPortrait: Bool {
+        return currentInterfaceOrientation?.isPortrait ?? false
+    }
+    
+    var isLandscape: Bool {
+        return currentInterfaceOrientation?.isLandscape ?? false
+    }
+}

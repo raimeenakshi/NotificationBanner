@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,11 +22,12 @@
 		5CBD22411E8353B30041DC8F /* ExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBD22401E8353B30041DC8F /* ExampleView.swift */; };
 		5CBD22431E83556E0041DC8F /* BasicNotificationBannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBD22421E83556E0041DC8F /* BasicNotificationBannerCell.swift */; };
 		5CBD22471E836DE50041DC8F /* NorthCarolinaBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBD22461E836DE50041DC8F /* NorthCarolinaBannerView.swift */; };
-		5CCB990C29733A51005A4BE6 /* NotificationBannerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5CCB990B29733A51005A4BE6 /* NotificationBannerSwift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ExampleViewController.swift */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
+		9C0E7B0E2E1A8A8D00E7B6BC /* NotificationBannerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9C0E7B0D2E1A8A8D00E7B6BC /* NotificationBannerSwift */; };
+		9C0E7B112E1A8BB300E7B6BC /* NotificationBannerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9C0E7B102E1A8BB300E7B6BC /* NotificationBannerSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,7 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CCB990C29733A51005A4BE6 /* NotificationBannerSwift in Frameworks */,
+				9C0E7B0E2E1A8A8D00E7B6BC /* NotificationBannerSwift in Frameworks */,
+				9C0E7B112E1A8BB300E7B6BC /* NotificationBannerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,7 +158,8 @@
 			);
 			name = NotificationBanner_Example;
 			packageProductDependencies = (
-				5CCB990B29733A51005A4BE6 /* NotificationBannerSwift */,
+				9C0E7B0D2E1A8A8D00E7B6BC /* NotificationBannerSwift */,
+				9C0E7B102E1A8BB300E7B6BC /* NotificationBannerSwift */,
 			);
 			productName = NotificationBanner;
 			productReference = 607FACD01AFB9204008FA782 /* NotificationBanner_Example.app */;
@@ -174,7 +177,6 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = S4K2Q6TV87;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
@@ -190,7 +192,7 @@
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
 			packageReferences = (
-				5CCB990A29733A51005A4BE6 /* XCRemoteSwiftPackageReference "NotificationBanner" */,
+				9C0E7B0F2E1A8BB300E7B6BC /* XCRemoteSwiftPackageReference "NotificationBanner" */,
 			);
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
@@ -361,9 +363,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = S4K2Q6TV87;
+				DEVELOPMENT_TEAM = WTCKBXSNZC;
 				INFOPLIST_FILE = NotificationBanner/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -383,9 +385,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = S4K2Q6TV87;
+				DEVELOPMENT_TEAM = WTCKBXSNZC;
 				INFOPLIST_FILE = NotificationBanner/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -422,20 +424,24 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5CCB990A29733A51005A4BE6 /* XCRemoteSwiftPackageReference "NotificationBanner" */ = {
+		9C0E7B0F2E1A8BB300E7B6BC /* XCRemoteSwiftPackageReference "NotificationBanner" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Daltron/NotificationBanner";
+			repositoryURL = "https://github.com/Daltron/NotificationBanner.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				minimumVersion = 4.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5CCB990B29733A51005A4BE6 /* NotificationBannerSwift */ = {
+		9C0E7B0D2E1A8A8D00E7B6BC /* NotificationBannerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5CCB990A29733A51005A4BE6 /* XCRemoteSwiftPackageReference "NotificationBanner" */;
+			productName = NotificationBannerSwift;
+		};
+		9C0E7B102E1A8BB300E7B6BC /* NotificationBannerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C0E7B0F2E1A8BB300E7B6BC /* XCRemoteSwiftPackageReference "NotificationBanner" */;
 			productName = NotificationBannerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
