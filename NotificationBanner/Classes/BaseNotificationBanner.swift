@@ -30,7 +30,7 @@ public protocol NotificationBannerDelegate: AnyObject {
 
 @objcMembers
 open class BaseNotificationBanner: UIView {
-    private(set) var bannerIndex: Int
+    public var bannerIndex: Int = -1
 
     /// Notification that will be posted when a notification banner will appear
     public static let BannerWillAppear: Notification.Name = Notification.Name(rawValue: "NotificationBannerWillAppear")
